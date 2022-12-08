@@ -4,10 +4,8 @@
 var currentDay = dayjs().format("MMMM DD, YYYY");
 var currentHour = dayjs().format("H");
 
+// TEMP TIME USING FOR DEVELOPMENT
 currentHour = 14;
-// Number of timeBlocks (it is a static 9, but setting variable for future scalability)
-// var timeBlockCount = $(".time-block").length;
-// var timeBlockArray = [$(".time-block")];
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
@@ -21,22 +19,24 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  //3. TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
+  // Apply the past, present, or future class to each timeblock by comparing the id to the current hour
+
   $(".time-block").each(function () {
-    // Time block hour > real current hour?
+    // FUTURE Time block hour > real current hour?
     if ($(this).data("hour") > currentHour) {
       console.log($(this).data("hour") + " > " + currentHour);
+      $(this).addClass("future");
 
-      // ...less than real current hour
+      // PAST...less than real current hour
     } else if ($(this).data("hour") < currentHour) {
       console.log($(this).data("hour") + " < " + currentHour);
+      $(this).addClass("past");
 
-      // ...equal to real current hour
-    } else console.log($(this).data("hour") + " = " + currentHour);
+      // PRESENT...equal to real current hour
+    } else {
+      console.log($(this).data("hour") + " = " + currentHour);
+      $(this).addClass("present");
+    }
   });
 
   // 4. TODO: Add code to get any user input that was saved in localStorage and set
