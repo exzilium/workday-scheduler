@@ -9,7 +9,7 @@ var currentHour = dayjs().format("H");
 var userTextObj = {
   hour9: "",
   hour10: "",
-  hou11: "",
+  hour11: "",
   hour12: "",
   hour13: "",
   hour14: "",
@@ -38,13 +38,13 @@ $(function () {
     // set object property value to user text
 
     // object property is [.timeblock id] and value is the User Entered text
-    userTextObj[$(this).parent().attr("id")] = $(this).siblings("textarea").val();
+    userTextObj[$(this).parent().attr("id")] = $(this)
+      .siblings("textarea")
+      .val();
     console.log(userTextObj);
-
 
     // save user entered text to local storage
     localStorage.setItem("schedule", JSON.stringify(userTextObj));
-
   });
 
   // Apply the past, present, or future class to each timeblock by comparing the id to the current hour
@@ -66,10 +66,26 @@ $(function () {
     }
   });
 
-  // 4. TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
+  // Get user text from local storage
+  userTextObj = JSON.parse(localStorage.getItem("schedule"));
+  console.log(userTextObj);
 
+  // Set text area of each time block to the corresponding user text found in userTextObject
+
+  // For each time block...
+  $(".time-block").each(function () {
+    // may have to set the time-block id here to use below
+
+    // Loop through the userTextObj keys
+    for (var [key, value] of Object.entries(userTextObj)) {
+      console.log(key);
+      if (key === $(this).attr("id")) {
+        console.log("Text Area " + $(this).attr("id"));
+        // Set text of text area (child of "this") to value from userTextObject
+        $(this).children("textarea").val(value);
+      }
+    }
+  });
   // Code to display the current date in the header of the page
   $("#currentDay").text(currentDay);
 });
