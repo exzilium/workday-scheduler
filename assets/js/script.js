@@ -41,20 +41,11 @@ $(function () {
     userTextObj[$(this).parent().attr("id")] = $(this).siblings("textarea").val();
     console.log(userTextObj);
 
-    /* ^^^ Where you left off: You're trying to see if you can use an object (userTextObj)
-to store all your user text. In this click event listener, you're trying to see if you can
-Get the ID of the timeblock
-User that ID to say userTextObj.[property] = the user text
-The property thing isn't working yet, but the user text is being set into the object,
-just not on the right property (a new property is being created)
-*/
-  });
 
-  //This code should use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+    // save user entered text to local storage
+    localStorage.setItem("schedule", JSON.stringify(userTextObj));
+
+  });
 
   // Apply the past, present, or future class to each timeblock by comparing the id to the current hour
   $(".time-block").each(function () {
