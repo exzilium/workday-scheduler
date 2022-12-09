@@ -68,20 +68,39 @@ $(function () {
 
   // Get user text from local storage
   userTextObj = JSON.parse(localStorage.getItem("schedule"));
+
+
+  // If there's nothing in local storage (null), set values to blank to prevent "null" errors when running functions
+  if (userTextObj === null) {
+
+    var userTextObj = {
+      hour9: "",
+      hour10: "",
+      hour11: "",
+      hour12: "",
+      hour13: "",
+      hour14: "",
+      hour15: "",
+      hour16: "",
+      hour17: "",
+    };
+}
   console.log(userTextObj);
 
   // Set text area of each time block to the corresponding user text found in userTextObject
 
   // For each time block...
   $(".time-block").each(function () {
+
     // may have to set the time-block id here to use below
+
 
     // Loop through the userTextObj keys
     for (var [key, value] of Object.entries(userTextObj)) {
       console.log(key);
       if (key === $(this).attr("id")) {
         console.log("Text Area " + $(this).attr("id"));
-        // Set text of text area (child of "this") to value from userTextObject
+        // Set text of text area (child of "this")
         $(this).children("textarea").val(value);
       }
     }
