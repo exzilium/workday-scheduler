@@ -4,7 +4,7 @@
 var currentDay = dayjs().format("dddd MMMM D, YYYY");
 var currentHour = dayjs().format("H");
 
-// Object to store future user text values with their itme block ids
+// Object to store future user text values with their time block ids
 
 var userTextObj = {
   hour9: "",
